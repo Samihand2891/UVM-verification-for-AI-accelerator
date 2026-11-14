@@ -2,6 +2,13 @@ results/*
 !results/.gitkeep
 *.vvp
 obj_*/
+venv/
+sim_build/
+testbench/cocotb/sim_build/
+testbench/cocotb/__pycache__/
+testbench/cocotb/results.xml
+testbench/pyuvm/__pycache__/
+testbench/pyuvm/results.xml
 
 # local notes and assistant settings
 CLAUDE.md

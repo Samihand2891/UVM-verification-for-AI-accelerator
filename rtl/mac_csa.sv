@@ -82,7 +82,8 @@ module mac_csa #(
     // =========================================================================
     // Output : resolve the redundant form (carry-propagate add)
     // =========================================================================
-    assign acc = signed'(acc_s + acc_c);
+    // $signed is supported by Icarus 11 and preserves the ACC_W-bit sum.
+    assign acc = $signed(acc_s + acc_c);
 
 `ifndef SYNTHESIS
     initial begin

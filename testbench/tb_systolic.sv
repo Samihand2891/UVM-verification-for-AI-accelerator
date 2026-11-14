@@ -135,9 +135,14 @@ module tb_systolic;
         fill(K_MAX, 3); run(K_MAX, 1);      // (-128)(127) * K: most negative sum
         // random
         repeat (N_RAND) begin
-            int K = $urandom_range(1, K_MAX);
+            int K;
+            K = $urandom_range(1, K_MAX);
             fill(K, 0);
-            run(K, 1'($urandom_range(0, 1)));
+            K=$urandom_range(1, K_MAX);
+            $display("Value of K = %0d", K);
+            fill(K,0);
+            run(K,1'($urandom_range(0,1)));
+
         end
 
         if (errors == 0) $display(" PASS  %0dx%0d (%0d matrices, %0d checks)", ROWS, COLS, mats, checks);
