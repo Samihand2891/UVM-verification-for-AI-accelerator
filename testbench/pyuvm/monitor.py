@@ -49,15 +49,18 @@ class AcceleratorMonitor(uvm_component) :
             if int(dut.rst_n.value) == 0:
                 active_operation = None
                 observed_results = {}
+                a_memory = [[0 for _ in range(64)] for _ in range(4)]
+                b_memory = [[0 for _ in range(4)] for _ in range(64)]
                 continue
 
             
-            if int(dut.a_we.value):
+            # Track accepted writes only; top ignores host writes while busy.
+            if int(dut.a_we.value) and int(dut.busy.value) == 0:
                 row = int(dut.a_row.value)
                 k = int(dut.a_k.value)
                 a_memory[row][k] = signed_value(dut.a_wdata.value, 8)
 
-            if int(dut.b_we.value):
+            if int(dut.b_we.value) and int(dut.busy.value) == 0:
                 k = int(dut.b_k.value)
                 col = int(dut.b_col.value)
                 b_memory[k][col] = signed_value(dut.b_wdata.value, 8)

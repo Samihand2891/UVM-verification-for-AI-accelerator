@@ -5,8 +5,21 @@ class AcceleratorScoreboard(uvm_subscriber) :
     def build_phase(self):
         self.checked_operations =0
         self.errors = []
+        self.k_values = set()
+        self.value_classes = set()
+        self.corner_values = set()
 
     def write(self , observed):
+        self.k_values.add(observed.k_len)
+        values = [value for row in observed.matrix_a for value in row]
+        values.extend(value for row in observed.matrix_b for value in row)
+        if any(value > 0 for value in values):
+            self.value_classes.add("positive")
+        if any(value < 0 for value in values):
+            self.value_classes.add("negative")
+        if any(value == 0 for value in values):
+            self.value_classes.add("zero")
+        self.corner_values.update(value for value in values if value in (-128, 127))
         expected_c = []
 
 
@@ -49,5 +62,12 @@ class AcceleratorScoreboard(uvm_subscriber) :
             raise AssertionError(
                 f"Scoreboard found {len(self.errors)} result mismatch(es)"
             )
+
+        self.logger.info(
+            "Coverage: K values=%s, data classes=%s, signed corners=%s",
+            sorted(self.k_values),
+            sorted(self.value_classes),
+            sorted(self.corner_values),
+        )
 
 

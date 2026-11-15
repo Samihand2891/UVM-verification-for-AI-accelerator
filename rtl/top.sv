@@ -50,6 +50,10 @@ module top #(
     logic array_done;
     logic result_capture;
     logic [OUT_DEPTH*ACC_W-1:0] c_flat;
+    logic a_write_enable;
+    logic b_write_enable;
+    assign a_write_enable = a_we && !busy;
+    assign b_write_enable = b_we && !busy;
 
     input_buffer #(
         .ROWS(ROWS),
@@ -59,11 +63,11 @@ module top #(
     ) u_input_buffer (
         .clk,
         .rst_n,
-        .a_we,
+        .a_we(a_write_enable),
         .a_row,
         .a_k,
         .a_wdata,
-        .b_we,
+        .b_we(b_write_enable),
         .b_k,
         .b_col,
         .b_wdata,

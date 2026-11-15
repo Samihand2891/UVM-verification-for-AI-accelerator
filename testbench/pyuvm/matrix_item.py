@@ -8,9 +8,17 @@ class MatrixOperation(uvm_sequence_item):
     INPUT_MIN =-128
     INPUT_MAX =127
 
-    def __init__(self, name="matrix_operation" , k_len=1 , matrix_a = None , matrix_b = None,):
+    def __init__(
+        self,
+        name="matrix_operation",
+        k_len=1,
+        matrix_a=None,
+        matrix_b=None,
+        busy_write_probe=False,
+    ):
         super().__init__(name)
         self.k_len = k_len
+        self.busy_write_probe = busy_write_probe
 
         if matrix_a is None:
             self.matrix_a = [
@@ -88,3 +96,14 @@ class MatrixOperation(uvm_sequence_item):
             f"A={self.ROWS}x{self.k_len}, "
             f"B={self.k_len}x{self.COLS}"
         )
+
+
+class InvalidKOperation(uvm_sequence_item):
+    """A start request used to verify the DUT's K-range rejection."""
+
+    def __init__(self, name="invalid_k_operation", k_len=0):
+        super().__init__(name)
+        self.k_len = k_len
+
+    def __str__(self):
+        return f"{self.get_name()}: invalid K={self.k_len}"

@@ -1,4 +1,4 @@
-PYTHON ?= python
+PYTHON ?= ../../venv/bin/python
 SIM ?= icarus
 export SIM
 
