@@ -34,7 +34,7 @@ Area, Fmax, Power and Throughput.
 
 ## ✅ Project checkpoints
 
-![Project checkpoints](results/plots/01_checkpoints.png)
+![Project checkpoints](results/01_checkpoints.png)
 
 | # | Checkpoint | Status | Evidence in this repo |
 |---|---|:---:|---|
@@ -105,7 +105,7 @@ Supporting arithmetic studies live in `rtl/adders/` (ripple-carry, block CLA, Ko
 Verification is layered: self-checking unit testbenches, a block-level systolic testbench, a top-level
 cocotb baseline, and a PyUVM environment with an independent scoreboard.
 
-![Verification effort](results/plots/05_verification_effort.png)
+![Verification effort](results/05_verification_effort.png)
 
 ### Regression summary
 
@@ -178,7 +178,7 @@ All numbers in this section come from `testbench/characterize/` (cocotb + Icarus
 
 ### Compute latency is exactly K + 8
 
-![Latency vs K](results/plots/02_latency_vs_k.png)
+![Latency vs K](results/02_latency_vs_k.png)
 
 Latency was measured for **every** legal K = 1…64 and equals `K + R + C` each time:
 **K** cycles to feed the array, **R + C − 1 = 7** cycles in `WAIT_ARRAY` while the skewed data drains through the grid, and
@@ -186,11 +186,11 @@ Latency was measured for **every** legal K = 1…64 and equals `K + R + C` each 
 
 ### Controller timing
 
-![FSM timing](results/plots/04_fsm_timing_k4.png)
+![FSM timing](results/04_fsm_timing_k4.png)
 
 ### Throughput and utilization
 
-![Throughput vs K](results/plots/03_throughput_vs_k.png)
+![Throughput vs K](results/03_throughput_vs_k.png)
 
 | K | MACs | Host load (cycles) | Compute (cycles) | Readout (cycles) | Compute MAC/cycle | End-to-end MAC/cycle |
 |--:|--:|--:|--:|--:|--:|--:|
@@ -223,7 +223,7 @@ Latency was measured for **every** legal K = 1…64 and equals `K + R + C` each 
 
 ### Area breakdown of the integrated design
 
-![Area breakdown](results/plots/06_area_breakdown_top.png)
+![Area breakdown](results/06_area_breakdown_top.png)
 
 | Block | Generic cells | Share | Flip-flops | Share |
 |---|--:|--:|--:|--:|
@@ -244,7 +244,7 @@ rolled up per block. Raw reports: `results/logs/synth_top_hier_stat.txt`.*
 
 ### PPA vs. array size (INT8, ACC_W = 32)
 
-![PPA vs array size](results/plots/07_ppa_vs_array_size.png)
+![PPA vs array size](results/07_ppa_vs_array_size.png)
 
 Pre-P&R estimate of the `systolic` array: Yosys + ABC timing-driven mapping to `sky130_fd_sc_hd`
 (tt, 25 °C, 1.8 V), no wire load, 500 ps assumed for clock-to-q + setup.
@@ -262,7 +262,7 @@ with R×C at a constant clock.
 
 ### PPA vs. precision (4×4, ACC_W = 2·IN_W + 16)
 
-![PPA vs precision](results/plots/08_ppa_vs_precision.png)
+![PPA vs precision](results/08_ppa_vs_precision.png)
 
 | array | IN_W | ACC_W | cells | FFs | area (µm²) | µm²/PE | fmax (MHz) | delay (ps) | peak GOPS |
 |---|---|---|---|---|---|---|---|---|---|
@@ -276,7 +276,7 @@ wins twice.
 
 ### 🧮 Arithmetic studies
 
-![Adder depth](results/plots/09_adder_depth.png)
+![Adder depth](results/09_adder_depth.png)
 
 **Adders: logic depth (gate levels, as written) vs. width** (`scripts/adder_depth.sh`)
 
